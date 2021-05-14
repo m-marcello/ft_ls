@@ -6,7 +6,7 @@
 #    By: mmarcell <mmarcell@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/05/10 18:00:23 by mmarcell      #+#    #+#                  #
-#    Updated: 2021/05/10 18:15:08 by mmarcell      ########   odam.nl          #
+#    Updated: 2021/05/14 15:16:24 by mmarcell      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,16 +14,16 @@ include src/.files.mk
 
 NAME := ft_ls
 
-OBJS := $(FILES:%.c=obj/%.o)
+OBJ := $(FILES:%.c=obj/%.o)
 
 CFLAGS := -Wall -Wextra -Werror -g
 
 LIBFT_PATH := libft
 LIBFT := $(LIBFT_PATH)/libft.a
 
-INCLUDES_PATH := hdr
-INCLUDES := -I $(INCLUDES_PATH) -I $(LIBFT_PATH)
-HDRS := $(INCLUDES_PATH)/ft_ls.h
+HDR_PATH := hdr
+INCLUDES := -I $(HDR_PATH) -I $(LIBFT_PATH)
+HDRS := $(HDR_PATH)/ft_ls.h
 
 PLUS := $$(tput setaf 2)+$$(tput sgr0)
 MINUS := $$(tput setaf 1)-$$(tput sgr0)
@@ -32,7 +32,7 @@ MAX_PARALLEL = 6
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@echo " $(PLUS) $@"
 
@@ -69,9 +69,10 @@ lre:
 	$(MAKE) lfclean
 	$(MAKE) all
 
-test: $(LIBFT) $(OBJS) $(HDRS)
+test: $(LIBFT) $(OBJ) $(HDRS)
 	@$(MAKE) all
 	@make re -C tests
+	@./tests/test
 
 FORCE:
 

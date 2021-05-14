@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_ls.h                                            :+:    :+:            */
+/*   ft_ls_data.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mmarcell <mmarcell@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2021/05/13 17:14:12 by mmarcell      #+#    #+#                 */
-/*   Updated: 2021/05/14 16:08:55 by mmarcell      ########   odam.nl         */
+/*   Created: 2021/05/13 17:16:38 by mmarcell      #+#    #+#                 */
+/*   Updated: 2021/05/14 11:36:17 by mmarcell      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS
-# define FT_LS
+#ifndef FT_LS_DATA
+# define FT_LS_DATA
 
-# include "ft_ls_data.h"
-# include "libft.h"
+# define OPTIONS "adglrRsStu"
 
-void	get_input(size_t argc, char **argv, t_input *input);
-void	error(char *info, int errnum);
+typedef struct s_option
+{
+	unsigned int	a : 1;
+	unsigned int	d : 1;
+	unsigned int	g : 1;
+	unsigned int	l : 1;
+	unsigned int	r : 1;
+	unsigned int	rr : 1;
+	unsigned int	s : 1;
+	unsigned int	ss : 1;
+	unsigned int	t : 1;
+	unsigned int	u : 1;
+}t_option;
+
+typedef struct s_input
+{
+	t_option	option;
+	char		*file;
+}t_input;
 
 #endif
