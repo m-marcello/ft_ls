@@ -6,13 +6,13 @@
 /*   By: mmarcell <mmarcell@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/13 17:43:15 by mmarcell      #+#    #+#                 */
-/*   Updated: 2021/05/14 16:12:10 by mmarcell      ########   odam.nl         */
+/*   Updated: 2021/05/14 17:56:46 by mmarcell      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <sys/errno.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 static void	save_options(const char *option_str, t_option *option)
 {
@@ -39,31 +39,31 @@ static void	save_options(const char *option_str, t_option *option)
 		else if (*option_str == 'u')
 			option->u = 1;
 		else
-			error(ft_strndup(option_str, 1), EINVAL);
+			invalid_option(*option_str);
 		++option_str;
 	}
 }
 
-static void	save_file(const char *path, t_input *input)
-{
-	input->file = ft_strdup(path);
-	ft_printf("file is %s\n", input->file);
-}
-
 void	get_input(size_t argc, char **argv, t_input *input)
 {
-	size_t	idx;
+	size_t		idx;
+	struct stat	buf;
 
 	idx = 1;
+	ft_bzero(&buf, sizeof(struct stat));
 	while (idx < argc && argv[idx][0] == '-')
 	{
 		save_options(&(argv[idx][1]), &(input->option));
 		++idx;
 	}
 	if (idx == argc)
-		save_file(getenv("PWD"), input);
+		input->file = ft_strdup(getenv("PWD"));
 	else if (idx == argc - 1)
-		save_file(argv[idx], input);
+	{
+		input->file = ft_strdup(argv[idx]);
+		if (stat(input->file, &buf) != 0)
+			error(input->file, 0);
+	}
 	else
-		error("Too many arguments.", 0);
+		error("Too many arguments.", -1);
 }

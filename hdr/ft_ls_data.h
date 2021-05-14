@@ -6,14 +6,15 @@
 /*   By: mmarcell <mmarcell@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/05/13 17:16:38 by mmarcell      #+#    #+#                 */
-/*   Updated: 2021/05/14 11:36:17 by mmarcell      ########   odam.nl         */
+/*   Updated: 2021/05/14 18:02:37 by mmarcell      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_DATA
 # define FT_LS_DATA
 
-# define OPTIONS "adglrRsStu"
+# define USAGE "usage: ls [-RSadglrstu] [file ...]"
+# define ILLEGAL_OPTION "illegal option -- "
 
 typedef struct s_option
 {
