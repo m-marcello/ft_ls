@@ -17,7 +17,8 @@
 # include "libft.h"
 
 void	get_input(size_t argc, char **argv, t_input *input);
-void	error(char *info, int errnum);
-void	invalid_option(char c);
+
+void	print_error_and_exit(char *info, int errnum);
+void	error_inv_option(char c);
 
 #endif

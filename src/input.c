@@ -20,26 +20,26 @@ static void	save_options(const char *option_str, t_option *option)
 	{
 		if (*option_str == 'a')
 			option->a = 1;
-		else if (*option_str == 'd')
+		else if (*option_str == 'd' && option->a == 0)
 			option->d = 1;
-		else if (*option_str == 'g')
+		else if (*option_str == 'g' && option->g == 0)
 			option->g = 1;
-		else if (*option_str == 'l')
+		else if (*option_str == 'l' && option->l == 0)
 			option->l = 1;
-		else if (*option_str == 'r')
+		else if (*option_str == 'r' && option->r == 0)
 			option->r = 1;
-		else if (*option_str == 'R')
+		else if (*option_str == 'R' && option->rr == 0)
 			option->rr = 1;
-		else if (*option_str == 's')
+		else if (*option_str == 's' && option->s == 0)
 			option->s = 1;
-		else if (*option_str == 'S')
+		else if (*option_str == 'S' && option->ss == 0)
 			option->ss = 1;
-		else if (*option_str == 't')
+		else if (*option_str == 't' && option->t == 0)
 			option->t = 1;
-		else if (*option_str == 'u')
+		else if (*option_str == 'u' && option->u == 0)
 			option->u = 1;
 		else
-			invalid_option(*option_str);
+			error_inv_option(*option_str);
 		++option_str;
 	}
 }
@@ -62,8 +62,8 @@ void	get_input(size_t argc, char **argv, t_input *input)
 	{
 		input->file = ft_strdup(argv[idx]);
 		if (stat(input->file, &buf) != 0)
-			error(input->file, 0);
+			print_error_and_exit(input->file, 0);
 	}
 	else
-		error("Too many arguments.", -1);
+		print_error_and_exit("Too many arguments.", -1);
 }
