@@ -46,7 +46,7 @@ obj:
 multi:
 	@$(MAKE) -j$(MAX_PARALLEL) all
 
-$(LIBFT): FORCE
+$(LIBFT):
 	@+make -C $(LIBFT_PATH) | sed "s/^/libft: /"
 
 clean: lclean
@@ -69,11 +69,9 @@ lre:
 	$(MAKE) lfclean
 	$(MAKE) all
 
-test: $(LIBFT) $(OBJ) $(HDRS)
+test: $(OBJ) $(HDRS)
 	@$(MAKE) all
 	@make re -C tests
 	@./tests/test
 
-FORCE:
-
-.PHONY: all clean fclean lclean lfclean lre test re multi obj FORCE
+.PHONY: all clean fclean lclean lfclean lre test re multi obj $(LIBFT)
