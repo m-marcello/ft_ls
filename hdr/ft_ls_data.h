@@ -14,7 +14,7 @@
 # define FT_LS_DATA
 
 # define USAGE "usage: ls [-RSadglrstu] [file ...]"
-# define ILLEGAL_OPTION "illegal option -- "
+# define INVALID_OPTION "invalid option -- "
 
 typedef struct s_option
 {
