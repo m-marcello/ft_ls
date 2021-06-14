@@ -45,12 +45,12 @@ char **get_argv(char *arg_str)
     return (argv);
 }
 
-Test(get_input, inv_opt, .exit_code = -1)
+Test(get_input, inv_opt, .exit_code=1)
 {
-    char *input = "-j";
+    char *arg = "-j";
 
-    int argc = get_argc(input);
-    char **argv = get_argv(input);
+    int argc = get_argc(arg);
+    char **argv = get_argv(arg);
     t_input input;
 
     get_input(argc, argv, &input);
