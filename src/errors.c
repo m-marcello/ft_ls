@@ -48,7 +48,7 @@ void	print_error_and_exit(char *info, int errnum)
 	else if (msg != NULL && errnum == -1)
 		ft_dprintf(2, "%s\n", msg);
 	ft_strdel(&msg);
-	exit(-1);
+	exit(1);
 }
 
 void	error_inv_option(char option)
