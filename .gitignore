@@ -36,6 +36,7 @@
 *.x86_64
 *.hex
 ft_ls
+tests/test
 
 # Debug files
 *.dSYM/
@@ -54,3 +55,6 @@ dkms.conf
 
 # Configuration
 *.vscode*
+
+# Temporary files
+*.orig

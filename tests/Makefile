@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-include ../src/.files.mk
-include ./src/.test_files.mk
+include ../src/_files.mk
+include ./src/_test_files.mk
 
 OBJ := $(FILES:%.c=../obj/%.o)
 TEST_OBJ := $(TEST_FILES:%.c=obj/%.o)
@@ -34,7 +34,7 @@ test: $(OBJ) $(TEST_OBJ)
 	@$(CC) -o $@ $^ -lcriterion $(LIBFT)
 	@echo " ${PLUS} $@"
 
-obj/%.o: src/%.c $(HDR) | obj
+obj/%.o: src/%.c $(HDR) obj
 	@$(CC) -c $(CFLAGS) -o $@ $(INCLUDES) $<
 	@echo " ${PLUS} $@"
 

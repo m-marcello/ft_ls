@@ -57,7 +57,7 @@ void	error_inv_option(char option)
 
 	info = ft_strnew(ft_strlen(INVALID_OPTION) + 4 + ft_strlen(USAGE));
 	ft_strcat(info, INVALID_OPTION);
-        ft_strncat(info, "'", 1);
+	ft_strncat(info, "'", 1);
 	ft_strncat(info, &option, 1);
 	ft_strncat(info, "'\n", 2);
 	ft_strcat(info, USAGE);

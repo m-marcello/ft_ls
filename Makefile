@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-include src/.files.mk
+include src/_files.mk
 
 NAME := ft_ls
 
-OBJ := $(FILES:%.c=obj/%.o)
+OBJ := $(FILES:%.c=obj/%.o) obj/main.o
 
 CFLAGS := -Wall -Wextra -Werror -g
 
@@ -36,7 +36,7 @@ $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@echo " $(PLUS) $@"
 
-obj/%.o: src/%.c $(HDRS) | obj
+obj/%.o: src/%.c $(HDRS) obj
 	@$(CC) -c $(CFLAGS) -o $@ $(INCLUDES) $<
 	@echo " $(PLUS) $@"
 
@@ -71,7 +71,9 @@ lre:
 
 test: $(OBJ) $(HDRS)
 	@$(MAKE) all
-	@make re -C tests
-	@./tests/test
+	@make re -C tests && ./tests/test
 
-.PHONY: all clean fclean lclean lfclean lre test re multi obj $(LIBFT)
+style:
+	astyle --style=allman --indent=force-tab src/*.c tests/src/*.c
+
+.PHONY: all clean fclean lclean lfclean lre test re multi $(LIBFT)

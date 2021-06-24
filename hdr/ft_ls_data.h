@@ -13,7 +13,7 @@
 #ifndef FT_LS_DATA
 # define FT_LS_DATA
 
-# define USAGE "usage: ls [-RSadglrstu] [file ...]"
+# define USAGE "usage: ./ft_ls [-RSadglrstu] [file ...]"
 # define INVALID_OPTION "invalid option -- "
 
 typedef struct s_option
