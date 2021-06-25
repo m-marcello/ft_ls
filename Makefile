@@ -10,20 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
-include src/_files.mk
+SOURCE_PATH := src
+include $(SOURCE_PATH)/_files.mk
 
 NAME := ft_ls
 
-OBJ := $(FILES:%.c=obj/%.o) obj/main.o
-
-CFLAGS := -Wall -Wextra -Werror -g
+OBJECT_PATH := obj
+OBJECTS := $(C_FILES:%.c=$(OBJECT_PATH)/%.o) $(OBJECT_PATH)/main.o
 
 LIBFT_PATH := libft
 LIBFT := $(LIBFT_PATH)/libft.a
 
 HDR_PATH := hdr
+HEADERS := $(H_FILES:%=$(HDR_PATH)/%)
+
+CFLAGS := -Wall -Wextra -Werror -g
+
+ALL_SRCS := $(C_FILES:%.c=$(SOURCE_PATH)/%.c) $(SOURCE_PATH)/main.c $(HEADERS)
+
 INCLUDES := -I $(HDR_PATH) -I $(LIBFT_PATH)
-HDRS := $(HDR_PATH)/ft_ls.h
 
 PLUS := $$(tput setaf 2)+$$(tput sgr0)
 MINUS := $$(tput setaf 1)-$$(tput sgr0)
@@ -32,15 +37,15 @@ MAX_PARALLEL = 6
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
+$(NAME): $(OBJECTS) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $@ $+
 	@echo " $(PLUS) $@"
 
-obj/%.o: src/%.c $(HDRS) obj
+$(OBJECT_PATH)/%.o: $(SOURCE_PATH)/%.c $(HEADERS) $(OBJECT_PATH)
 	@$(CC) -c $(CFLAGS) -o $@ $(INCLUDES) $<
 	@echo " $(PLUS) $@"
 
-obj:
+$(OBJECT_PATH):
 	@mkdir -p $@
 
 multi:
@@ -53,7 +58,8 @@ clean: lclean
 	@+make clean -C $(LIBFT_PATH) | sed "s/^/libft: /"
 
 lclean:
-	@rm -rfv obj | sed "s/^/ $(MINUS) /"
+	@rm -rfv $(OBJECT_PATH) | sed "s/^/ $(MINUS) /"
+	echo "$(HEADERS)"
 
 fclean: clean lfclean
 	@rm -fv $(LIBFT) | sed "s/^/ $(MINUS) /"
@@ -69,11 +75,11 @@ lre:
 	$(MAKE) lfclean
 	$(MAKE) all
 
-test: $(OBJ) $(HDRS)
+test: $(OBJECTS) $(HEADERS)
 	@$(MAKE) all
 	@make re -C tests && ./tests/test
 
 style:
-	astyle --style=allman --indent=force-tab src/*.c tests/src/*.c
+	astyle --style=allman --indent=force-tab $(ALL_SRCS)
 
 .PHONY: all clean fclean lclean lfclean lre test re multi $(LIBFT)
