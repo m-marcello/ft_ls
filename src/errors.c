@@ -48,17 +48,18 @@ void	print_error_and_exit(char *info, int errnum)
 	else if (msg != NULL && errnum == -1)
 		ft_dprintf(2, "%s\n", msg);
 	ft_strdel(&msg);
-	exit(-1);
+	exit(1);
 }
 
 void	error_inv_option(char option)
 {
 	char	*info;
 
-	info = ft_strnew(ft_strlen(ILLEGAL_OPTION) + 2 + ft_strlen(USAGE));
-	ft_strcat(info, ILLEGAL_OPTION);
+	info = ft_strnew(ft_strlen(INVALID_OPTION) + 4 + ft_strlen(USAGE));
+	ft_strcat(info, INVALID_OPTION);
+	ft_strncat(info, "'", 1);
 	ft_strncat(info, &option, 1);
-	ft_strncat(info, "\n", 1);
+	ft_strncat(info, "'\n", 2);
 	ft_strcat(info, USAGE);
 	print_error_and_exit(info, -1);
 }
