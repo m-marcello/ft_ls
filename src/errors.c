@@ -25,7 +25,7 @@
 **	appends 'ft_ls: ' in front of info and prints it with the string corres-
 **	ponding with errnum
 ** info != NULL && errnum == -1
-**	appends 'ft_lf: ' in front of info and prints it as error
+**	appends 'ft_ls: ' in front of info and prints it as error
 */
 
 void	print_error_and_exit(char *info, int errnum)
