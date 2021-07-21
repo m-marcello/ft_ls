@@ -47,15 +47,15 @@ char **get_argv(char *arg_str)
 	return (argv);
 }
 
-Test(get_input, inv_opt, .exit_code=1)
-{
-	char *arg = "ft_ls -j";
-
-	int argc = get_argc(arg);
-	char **argv = get_argv(arg);
-	t_input input;
-	get_input(argc, argv, &input);
-}
+//Test(get_input, inv_opt, .exit_code=1)
+//{
+	//char *arg = "ft_ls -j";
+//
+	////int argc = get_argc(arg);
+	//char **argv = get_argv(arg);
+	//t_input input;
+	//get_input(argc, argv, &input);
+//}
 
 // invalid option
 // double option
