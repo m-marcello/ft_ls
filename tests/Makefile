@@ -22,7 +22,8 @@ LIBFT_PATH := ../libft
 LIBFT := $(LIBFT_PATH)/libft.a
 
 HDR_PATH := ../hdr
-INCLUDES := -I $(HDR_PATH) -I $(LIBFT_PATH)
+CRIT_PATH := ~/.brew/Cellar/criterion/2.3.3/include
+INCLUDES := -I $(HDR_PATH) -I $(LIBFT_PATH) -I $(CRIT_PATH)
 HDR := $(HDR_PATH)/ft_ls.h $(HDR_PATH)/ft_ls_data.h
 
 PLUS = $$(tput setaf 2)+$$(tput sgr0)
