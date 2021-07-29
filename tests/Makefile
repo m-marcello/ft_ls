@@ -10,13 +10,15 @@
 #                                                                              #
 # **************************************************************************** #
 
-include ../src/_files.mk
-include ./src/_test_files.mk
+SOURCE_PATH := ../src
+TEST_SOURCE_PATH := src
+include $(SOURCE_PATH)/_files.mk
+include $(TEST_SOURCE_PATH)/_test_files.mk
 
-OBJ := $(FILES:%.c=../obj/%.o)
-TEST_OBJ := $(TEST_FILES:%.c=obj/%.o)
-
-CFLAGS := -Wall -Wextra -Werror
+OBJECT_PATH := ../obj
+TEST_OBJECT_PATH := obj
+OBJECTS := $(C_FILES:%.c=$(OBJECT_PATH)/%.o)
+TEST_OBJECTS := $(TEST_FILES:%.c=$(TEST_OBJECT_PATH)/%.o)
 
 LIBFT_PATH := ../libft
 LIBFT := $(LIBFT_PATH)/libft.a
@@ -25,13 +27,16 @@ HDR_PATH := ../hdr
 CRIT_PATH := ~/.brew/Cellar/criterion/2.3.3/include
 INCLUDES := -I $(HDR_PATH) -I $(LIBFT_PATH) -I $(CRIT_PATH)
 HDR := $(HDR_PATH)/ft_ls.h $(HDR_PATH)/ft_ls_data.h
+HEADERS := $(H_FILES:%=$(HDR_PATH)/%)
+
+CFLAGS := -Wall -Wextra -Werror
 
 PLUS = $$(tput setaf 2)+$$(tput sgr0)
 MINUS = $$(tput setaf 1)-$$(tput sgr0)
 
 all: test
 
-test: $(OBJ) $(TEST_OBJ)
+test: $(OBJECTS) $(TEST_OBJECTS)
 	@$(CC) -o $@ $^ -lcriterion $(LIBFT)
 	@echo " ${PLUS} $@"
 
@@ -43,7 +48,7 @@ obj:
 	@mkdir -p $@
 
 clean:
-	@rm -fv $(TEST_OBJ) | sed "s/^/ $(MINUS) /"
+	@rm -fv $(TEST_OBJECTS) | sed "s/^/ $(MINUS) /"
 
 fclean: clean
 	@rm -fv test | sed "s/^/ $(MINUS) /"
