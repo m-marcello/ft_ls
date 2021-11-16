@@ -76,10 +76,10 @@ Test(get_input, no_input)
 	char *file_ecpected = getenv("PWD");
 
 	int argc = get_argc(arg);
-	cr_assert(eq(i32, argc, argc_expected));
+	cr_assert_eq(argc, argc_expected);
 	char **argv = get_argv(arg);
 	t_input input;
 	get_input(argc, argv, &input);
-	cr_assert(eq(str, input.file, file_ecpected));
+	cr_assert_eq(input.file, file_ecpected);
 }
 
